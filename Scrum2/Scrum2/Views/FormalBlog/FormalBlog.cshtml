@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Datalayer.Models.BlogEntry>
+@{
+    ViewBag.Title = "FormalBlog";
+}
+
+@*Detta är mest "placeholder"-kod. Mycket kommer behöva ändras när väl databas och metoder i controllers finns*@
+
+<h1>Formal blog</h1>
+
+<img class="Blog_Top_Img" src="~/Content/Images/Biblotek.jpg" alt="~/Content/Images/Image_Not_Found.jpg">
+
+<div>
+    @*<button>Write new post!</button>*@
+    @Html.ActionLink("Write new post!", "CreateFormal", "BlogEntries")
+</div>
+
+<div>
+    <ul>
+        <li>
+            <a href="">Research</a>          @*href kan skrivas som t.ex. UrlAction, sedan laddar vi om sidan med önskad info*@
+            <ul>
+                <li>category1</li>           @*underkategorier till huvudkategorin, fylls med något meningsfullt när det finns tillagt*@
+                <li>category2</li>
+                <li>category3</li>
+            </ul>
+        </li>
+        <li><a href="">Education</a></li>    @*href kan skrivas som t.ex. UrlAction, sedan laddar vi om sidan med önskad info*@
+    </ul>
+</div>
+
+@*Lite skräpkod. Möjligt exempel/mall för hur man skulle kunna göra listningen av kommentarer.*@
+@foreach (var post in Model)
+{
+    string postclass = "";
+    if (post.IsEducation == true)
+    {
+        postclass = "field-edu";
+    }
+    else if (post.IsEducation == false)
+    {
+        postclass = "field-res";
+    }
+    else
+    {
+        postclass = "field-missing";
+    }
+    <div class="@postclass">
+        <h3>@Html.ActionLink(post.Title, "BlogEntry", "BlogEntries", new { id = post.BlogEntryId }, null) </h3>
+        <p>@post.Text</p>
+        <p>@post.CreatedDate</p>
+        @try
+        {
+        <p>@Html.ActionLink(post.Attachment.FileName, "GetFile", "Files", new { id = post.Attachment.FileId }, null) </p>
+        }
+        catch
+        {
+            <br/>
+        }
+    </div>
+    @*<div>
+            <h4>Comments</h4>
+            <div>
+                @foreach (var comment in post.Comments)
+                {
+                    <div>
+                        <p>comment.Name</p>
+                        <p>comment.Comment</p>
+                    </div>
+                }
+            </div>
+        </div>*@
+}

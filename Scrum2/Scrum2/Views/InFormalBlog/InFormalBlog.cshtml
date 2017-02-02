@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Datalayer.Models.BlogEntry>
+@{
+    ViewBag.Title = "InFormalBlog";
+}
+
+<h1>InFormalBlog</h1>
+
+<img class="Blog_Top_Img" src="~/Content/Images/introvalkommen.jpg" alt="~/Content/Images/Image_Not_Found.jpg">
+
+<div>
+    @*<button>Write new post!</button>*@
+    @Html.ActionLink("Write new post!", "CreateInformal", "BlogEntries")
+</div>
+
+<div>
+    <ul>
+        <li>
+            <a href="">Research</a>          @*href kan skrivas som t.ex. UrlAction, sedan laddar vi om sidan med önskad info*@
+            <ul>
+                <li>category1</li>           @*underkategorier till huvudkategorin, fylls med något meningsfullt när det finns tillagt*@
+                <li>category2</li>
+                <li>category3</li>
+            </ul>
+        </li>
+        <li><a href="">Education</a></li>    @*href kan skrivas som t.ex. UrlAction, sedan laddar vi om sidan med önskad info*@
+    </ul>
+</div>
+
+@*Lite skräpkod. Möjligt exempel/mall för hur man skulle kunna göra listningen av kommentarer.*@
+
+@foreach (var post in Model)
+{
+    <div>
+        <h3>@post.Title</h3>
+        <p>@post.Text</p>
+        <p>@post.CreatedDate</p>
+    </div>
+    @*<div>
+            <h4>Comments</h4>
+            <div>
+                @foreach (var comment in post.Comments)
+                {
+                    <div>
+                        <p>comment.Name</p>
+                        <p>comment.Comment</p>
+                    </div>
+                }
+            </div>
+        </div>*@
+}

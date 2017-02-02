@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Datalayer.Models.BlogEntry
+<div class="blogEntryWrapper">
+    <div class="blogEntry">
+        <div class="blogEntryDetails">
+            <h3>@Html.Raw(Model.Title)</h3>
+            <h4>@Html.Raw(Model.CreatedDate.ToString())</h4>
+        </div>
+        <div class="blogEntryContentWrapper">
+            <p class="blogEntryContent">@Html.Raw(Model.Text)</p>
+            <div class="blogEntryAttachment">
+                @try
+                {
+                <p>@Html.ActionLink(Model.Attachment.FileName, "GetFile", "Files", new { id = Model.Attachment.FileId }, null) </p>
+                }
+                catch
+                {
+                    
+                }
+            </div>
+        </div>
+        <div class="commentSection">
+            @using (Html.BeginForm("SaveComment", "BlogEntryComment"))
+            {
+                <div class="col-md-10">
+                    <input type="text" id="CommentText", name="CommentText" />
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="Author" name="Author" />
+                </div>
+                <input type="submit" value="skicka" class="btn btn-default" />
+            }
+        </div>
+    </div>
+</div>

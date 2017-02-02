@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Welcome to Oru Booking Program</h1>
+    <h2>This site is for oru-emplyees for conectivity and book meetings</h2>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p></p>
+    }
+    else
+    {
+        <p>Click join or log in in the Right corner</p>
+    }
+    @*<p>User signature: @ViewBag.userSig</p>*@ @*<- TODO: testkod, ta bort.*@
+    @*<p class="lead">Denna sida ska alla kunna se, oavsett om man är inloggad eller inte.</p>*@
+    <img class="Intro-img" src="~/Content/Images/orebroUnivesity.jpg" alt="~/Content/Images/ImageNotFound.jpg">
+</div>
